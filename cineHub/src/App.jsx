@@ -4,13 +4,12 @@ import Home from './Component/Home'
 import Navbar from './Component/Navbar'
 import Error404 from './Component/Error404'
 import SignIn from './Component/SignIn'
-import Favorites from './Component/Favorites'
 import Footer from './Component/Footer'
 import ComingSoon from './Component/ComingSoon'
 import Movie from './Component/Movie/Movie'
 import NewMovie from './Component/Movie/NewMovie'
 import WatchList from './Component/Movie/WatchList'
-import Login from './login'
+import Login from './Login'
 function App() {
   return (
     <BrowserRouter>
