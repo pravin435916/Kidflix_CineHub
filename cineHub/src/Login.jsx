@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
+import baseUrl from './Url'
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     const loginData = { email, password };
     try {
-      const response = await axios.post("http://localhost:5000/login", loginData);
+      const response = await axios.post(`${baseUrl}/login`, loginData);
       toast.success(response.data.message);
       navigate('/', { state: { user: response.data } });
       localStorage.setItem('user', JSON.stringify(response.data))
