@@ -9,14 +9,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import {  useSelector } from 'react-redux';
-import './Movie/movie.css'
 function Home() {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState('Doraemon');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [type, setType] = useState('');
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
   const apiKey = "1a2127e5";
   const movieContainerRef = useRef(null);
   const location = useLocation();
@@ -38,7 +36,6 @@ function Home() {
   
   
   const fetchData = () => {
-    setLoading(true);
     if (search.trim() === '') {
       setData([]);
       setPage(1);
@@ -48,7 +45,6 @@ function Home() {
     fetch(`https://www.omdbapi.com/?s=${search}&y=${search}&${type ? `type=${type}&` : ''}&page=${page}&apikey=${apiKey}`)
       .then((res) => res.json())
       .then((dta) => {
-        setLoading(false)
         console.log(dta)
         if (dta.Search) {
           if (page === 1) {
@@ -61,7 +57,6 @@ function Home() {
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
       });
   };
   const handleMovieLink = (movie) => {
@@ -108,11 +103,6 @@ function Home() {
 
   return (
     <>
-     {loading ? (
-                <div className="w-full min-h-screen flex justify-center items-center bg-[#070F2B] text-white">
-                    <span class="loader"></span>
-                </div>
-            ) : (
       <div className="bg-[#070F2B] min-h-screen font-sans overflow-hidden m-0">
         <div className="p-8 flex sm:flex-row flex-col gap-4 items-center">
           <input
@@ -184,7 +174,6 @@ function Home() {
           ))}
         </div>
       </div>
-      )}
     </>
   );
 }
